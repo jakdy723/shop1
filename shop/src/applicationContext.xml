@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	 xmlns:tx="http://www.springframework.org/schema/tx"
+	 xmlns:aop="http://www.springframework.org/schema/aop"
+	 xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+	http://www.springframework.org/schema/aop
+    http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+	 http://www.springframework.org/schema/tx
+	http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
+	
+	<!-- 设置数据源 -->
+ 	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" >
+		<property name="jdbcUrl" value ="jdbc:mysql://localhost:3306/example" />
+		<property name="user" value ="root"></property>
+		<property name="password" value ="04092013"></property>
+		<property name="driverClass" value ="com.mysql.jdbc.Driver"></property>
+	</bean>
+	
+	<!-- 设置sessionFactory负责开启数据连接session -->
+	<bean id="sessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean" >
+		<property name="dataSource" ref = "dataSource"></property>
+		<property name="configLocation" value = "classpath:hibernate.cfg.xml"></property>
+	</bean>
+	
+	<!-- 设置事务管理bean -->
+	<bean id = "transactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager" >
+		<property name="sessionFactory" ref = "sessionFactory"></property>
+	</bean>
+	
+	<!-- 配置advice 指定哪些方法需要什么类型的事务-->
+	<tx:advice id = "advice"  transaction-manager = "transactionManager">
+		<tx:attributes>
+			<tx:method name="save" propagation = "REQUIRED"/>
+			<tx:method name="update" propagation = "REQUIRED"/>
+			<tx:method name="delete" propagation = "REQUIRED"/>
+			<tx:method name="*" propagation = "SUPPORTS"/>
+		</tx:attributes>
+	</tx:advice> 
+	
+	
+	<aop:config>
+		<aop:advisor advice-ref="advice"
+			pointcut="execution(* cn.it.service.imp.*.*(..))" /><!-- 配置哪些包的事务需要切入事务 -->
+	</aop:config>
+	
+	
+	
+	<!-- 支持 XML和注解 -->
+	<!-- <bean id="properties" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+		<property name="locations">
+			<list>
+				<value>classpath:lucene.properties</value>
+				<value>classpath:public.properties</value>
+			</list>
+		</property>
+	</bean> -->
+	
+</beans>
