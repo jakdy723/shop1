@@ -1,16 +1,17 @@
 package cn.it.service.imp;
 
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
-
 import cn.it.model.Category;
 import cn.it.service.CategoryInterface;
-import cn.it.util.HibernateSessionFactory;
 
-public class CategoryService implements CategoryInterface {
+@SuppressWarnings("unchecked")
+public class CategoryService extends BaseServiceImpl <Category> implements CategoryInterface {
 	
-	private SessionFactory sessionFactory;
+//	用于查询或其他事务
+	public CategoryService(){
+		super();
+	}
+	
+	/*private SessionFactory sessionFactory;
 	
 	protected Session getSession() {
 		return sessionFactory.getCurrentSession();
@@ -50,9 +51,41 @@ public class CategoryService implements CategoryInterface {
 
 	}
 	
-	@Override/*spring管理事务*/
+	@Override
+	public void save(Category category) {
+		getSession().save(category);
+		
+	}
+	@Override
+	public void delete(int id) {
+		// TODO Auto-generated method stub mathod 1 
+		Object object = getSession().get(Category.class, id);
+		if (object != null)
+			getSession().delete(object);
+//		method 2
+		String hql = "DELETE Category WHERE id = id";
+		getSession().createQuery(hql).setInteger("id", id).executeUpdate();
+	}
+
+
+	@Override
+	public Category get(int id) {
+		// TODO Auto-generated method stub
+		return (Category)getSession().get(Category.class, id);
+	}
+
+
+	@Override
+	public List<Category> query() {
+		// TODO Auto-generated method stub
+		String hqlString = "FROM Category";
+		return getSession().createQuery(hqlString).list();
+	}
+
+
+	@Overridespring管理事务
 	public void update(Category category) {
 		
 		getSession().update(category);
-	}
+	}*/
 }

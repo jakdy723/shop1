@@ -16,7 +16,13 @@ public class Category implements java.io.Serializable {
 	private String typed;
 	private Boolean hot;
 
+	
 	// Constructors
+
+	@Override
+	public String toString() {
+		return "Category [id=" + id + ", typed=" + typed + ", hot=" + hot + "]";
+	}
 
 	/** default constructor */
 	public Category() {

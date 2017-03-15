@@ -35,13 +35,13 @@ public class SSHTest {
 		
 		CategoryInterface service = new CategoryService();
 		
-		service.save(new Category("nanshi" ,false));
+		service.save(new Category( "nanshi" ,false));
 	}
 	
 	@Test
 	public void hibernateAndSpring(){
 		
-		categoryInterface.update(new Category(1," 女士" ,false));
+		categoryInterface.update(new Category(3, "女士22" , false));
 	}
 	
 
