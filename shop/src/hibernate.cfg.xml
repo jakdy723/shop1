@@ -6,20 +6,22 @@
 <hibernate-configuration>
 
 	<session-factory>
-		<property name="dialect">org.hibernate.dialect.MySQLDialect</property>
-		
+		<property name="dialect">
+			org.hibernate.dialect.MySQLDialect
+		</property>
+
 		<!-- <property name="connection.url">jdbc:mysql://localhost:3306/example</property>
-		<property name="connection.username">root</property>
-		<property name="connection.password">04092013</property>
-		<property name="connection.driver_class">com.mysql.jdbc.Driver</property>
-		 -->
-		 <property name="show_sql">true</property>
-        <!-- 设置格式为 sql -->
-        <property name="format_sql">true</property>
-        
-        <!-- 第一次加载 hibernate 时根据实体类自动建立表结构，以后自动更新表结构 -->
-        <property name="hbm2ddl.auto">update</property>      
-        
+			<property name="connection.username">root</property>
+			<property name="connection.password">04092013</property>
+			<property name="connection.driver_class">com.mysql.jdbc.Driver</property>
+		-->
+		<property name="show_sql">true</property>
+		<!-- 设置格式为 sql -->
+		<property name="format_sql">true</property>
+
+		<!-- 第一次加载 hibernate 时根据实体类自动建立表结构，以后自动更新表结构 -->
+		<property name="hbm2ddl.auto">update</property>
+
 		<property name="myeclipse.connection.profile">
 			com.mysql.jdbc.Driver
 		</property>
@@ -27,11 +29,12 @@
 		<property name="javax.persistence.validation.mode">
 			none
 		</property>
-		
+
 		<mapping resource="cn/it/model/Category.hbm.xml" />
-		
-		
-		
+		<mapping resource="cn/it/model/Account.hbm.xml" />
+
+
+
 
 	</session-factory>
 

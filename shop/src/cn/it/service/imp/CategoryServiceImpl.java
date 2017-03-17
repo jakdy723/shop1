@@ -1,13 +1,15 @@
 package cn.it.service.imp;
 
+import org.springframework.stereotype.Service;
+
 import cn.it.model.Category;
 import cn.it.service.CategoryInterface;
 
-@SuppressWarnings("unchecked")
-public class CategoryService extends BaseServiceImpl <Category> implements CategoryInterface {
+@Service
+public class CategoryServiceImpl extends BaseServiceImpl <Category> implements CategoryInterface {
 	
 //	用于查询或其他事务
-	public CategoryService(){
+	public CategoryServiceImpl(){
 		super();
 	}
 	
