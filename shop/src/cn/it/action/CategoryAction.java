@@ -14,7 +14,7 @@ import com.opensymphony.xwork2.ModelDriven;
  * @author Administrator
  *
  */
-@Controller
+@Controller("categoryAction")
 @Scope("prototype")
 public class CategoryAction extends BaseAction <Category> {
 	

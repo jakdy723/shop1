@@ -1,16 +1,38 @@
 package cn.it.service.imp;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
+
+import com.google.common.collect.Sets;
+
 
 import cn.it.model.Category;
 import cn.it.service.CategoryInterface;
 
-@Service
+@Service("categoryServiceImpl")
 public class CategoryServiceImpl extends BaseServiceImpl <Category> implements CategoryInterface {
 	
 //	用于查询或其他事务
 	public CategoryServiceImpl(){
 		super();
+	}
+	
+	public List<Category> queryJoinAccount(String type, int page, int size){
+		String hqlString = "FROM Category c LEFT JOIN FETCH c.account WHERE c.ctype LIKE :type";
+		return getSession().createQuery(hqlString).
+				setString("type", "%" + type + "%")
+				.setFirstResult((page-1)*size).setMaxResults(size).list();
+		
+	}
+
+	@Override
+	public Long getCount(String type) {
+		// TODO Auto-generated method stub
+		String hql = "SELECT count(c) FROM Category c  WHERE c.ctype LIKE :type";
+		return  (Long)getSession().createQuery(hql).
+				setString("type", "%" + type + "%")
+				.uniqueResult();
 	}
 	
 	/*private SessionFactory sessionFactory;

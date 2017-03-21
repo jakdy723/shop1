@@ -7,6 +7,13 @@
 		<action name ="category_*" class ="categoryAction" method ="{1}">
 			<result name = "index">/index.jsp</result>
 		</action>
+		<action name ="account_*" class ="accountAction" method ="{1}">
+			<result name = "index">/index.jsp</result>
+		</action>
+		<!-- 所有的请求都交给默认方法 execute -->
+		<action name ="send_*_*" class ="sendAction" >
+			<result name = "send">/WEB-INF/{1}/{2}.jsp</result>
+		</action>
 	
 	</package>
 </struts>    

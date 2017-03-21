@@ -18,6 +18,8 @@
     <a href = "${pageContext.request.contextPath }/category_update.action?id=2&typed=child&hot=false">访问update2</a>
 
 	<a href = "category_query.action">查询所有类别</a>
+	
+	<a href = "send_main_aindex.action">访问easyui版本</a>
  	<br/>
  	<c:forEach items= "${requestScope.categorylist}" var = "category">
  		${category.id}|${category.typed}|${category.hot}<br/>
